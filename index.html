@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <style>
+    /* Hide on non-mobile screens */
+    @media screen and (min-width: 768px) {
+      body {
+        display: none;
+      }
+    }
+    body {
+      background-color: #f9f9f9;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .container {
+      text-align: center;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .image {
+      width: 150px;
+      height: 150px;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #333;
+    }
+    .message strong {
+      font-weight: bold;
+    }
+    /* Loader animation */
+    .loader {
+      display: flex;
+      width: 50px;
+      aspect-ratio: 1;
+      animation: l10-0 1.5s infinite linear;
+      margin: 20px auto;
+    }
+    .loader:before,
+    .loader:after {
+      content: "";
+      width: 50%;
+      background: #514b82;
+      clip-path: polygon(0 0,100% 50%,0% 100%);
+      animation: inherit;
+      animation-name: l10-1;
+      transform-origin: bottom left;
+    }
+    .loader:before {
+      clip-path: polygon(0 50%,100% 0,100% 100%);
+      transform-origin: bottom right;
+      --s:-1;
+    }
+    @keyframes l10-0 {
+      0%,34.99% {transform: scaley(1)}
+      35%,70%   {transform: scaley(-1)}
+      90%,100%  {transform: scaley(-1) rotate(180deg)}
+    }
+    @keyframes l10-1 {
+      0%,10%,70%,100%{transform:translateY(-100%) rotate(calc(var(--s,1)*135deg))}
+      35%            {transform:translateY(0%)    rotate(0deg)}
+    }
+  </style>
+  <script>
+    async function redirectToURL() {
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxnlSh5wrEtO1HHNmM6X3KEgAGM9wtZ2evvPg1VoQ-tdFT-vSm1E3SknvI1mP-LHNlsPQ/exec');
+        const url = await response.text();
+        window.location.href = url;
+      } catch (error) {
+        console.error("Error fetching URL:", error);
+      }
+    }
+    window.onload = redirectToURL;
+  </script>
+</head>
+<body>
+  <div class="container">
+    <img src="https://whatsapp-media-library.s3.ap-south-1.amazonaws.com/IMAGE/673c941b7b4ac10beb8a8360/7709550_live.png" alt="Excited Icon" class="image">
+    <div class="message">
+      <strong>Welcome to Yog Parampara.</strong><br>
+      You will be redirected to the session.
+    </div>
+    <div class="loader"></div>
+  </div>
+</body>
+</html>
